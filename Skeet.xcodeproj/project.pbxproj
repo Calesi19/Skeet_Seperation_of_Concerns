@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0364DE029A6ECFA00C2A379 /* storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0364DDE29A6ECFA00C2A379 /* storage.cpp */; };
 		C15451E627403ED30095997B /* effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C15451E527403ED30095997B /* effect.cpp */; };
 		C16B8F522744ABDE009CC1DC /* score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16B8F502744ABDE009CC1DC /* score.cpp */; };
 		C16F25492716733A000FA407 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16F25482716733A000FA407 /* time.cpp */; };
@@ -34,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B0364DDE29A6ECFA00C2A379 /* storage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = storage.cpp; sourceTree = "<group>"; };
+		B0364DDF29A6ECFA00C2A379 /* storage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = storage.hpp; sourceTree = "<group>"; };
 		C15451E427403CD70095997B /* effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = effect.h; sourceTree = "<group>"; };
 		C15451E527403ED30095997B /* effect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = effect.cpp; sourceTree = "<group>"; };
 		C159391D271E278800A7F857 /* bullet.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = bullet.h; sourceTree = "<group>"; tabWidth = 3; };
@@ -74,6 +77,8 @@
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
+				B0364DDE29A6ECFA00C2A379 /* storage.cpp */,
+				B0364DDF29A6ECFA00C2A379 /* storage.hpp */,
 				C16B8F532744AFD8009CC1DC /* score.h */,
 				C16B8F502744ABDE009CC1DC /* score.cpp */,
 				C15451E527403ED30095997B /* effect.cpp */,
@@ -179,6 +184,7 @@
 				C1D4EAEA2577F57B002B56E3 /* point.cpp in Sources */,
 				C16F25492716733A000FA407 /* time.cpp in Sources */,
 				C1841329273E9C4900143AB2 /* game.cpp in Sources */,
+				B0364DE029A6ECFA00C2A379 /* storage.cpp in Sources */,
 				C1D4EAEB2577F57B002B56E3 /* skeet.cpp in Sources */,
 				C184132B273E9C4900143AB2 /* gun.cpp in Sources */,
 			);

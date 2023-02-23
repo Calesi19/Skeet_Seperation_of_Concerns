@@ -14,12 +14,21 @@
 #endif /* storage_hpp */
 
 
-
 class StorageElement
 {
     
 };
 
+class StorageBird: public StorageElement
+{
+    
+};
+
+
+class StorageBullet: public StorageElement
+{
+    
+};
 
 class StorageTime
 {
@@ -49,17 +58,57 @@ private:
     
     class Iterator
     {
+    protected:
+        std::vector<StorageElement>& elements;
+        int index;
         
+    public:
+        Iterator(std::vector<StorageElement>& elems) : elements(elems), index(0) {}
+        virtual void operator++() = 0;
+        virtual StorageElement& operator*() = 0;
+        virtual bool operator!=(const Iterator& other) = 0;
     };
     
-    class Storage::IteratorBird
+    class IteratorBird: public Iterator
     {
+    public:
+        IteratorBird(std::vector<StorageElement>& elems) : Iterator(elems) {}
         
+        void operator++() override {
+            while (index < elements.size() && dynamic_cast<StorageBird*>(&elements[index]) == nullptr) {
+                index++;
+            }
+            index++;
+        }
+        
+        StorageElement& operator*() override {
+            return elements[index-1];
+        }
+        
+        bool operator!=(const Iterator& other) override {
+            return index != dynamic_cast<const IteratorBird*>(&other)->index;
+        }
     };
     
-    class Storage::IteratorBullet
+    class IteratorBullet: public Iterator
     {
+    public:
+        IteratorBullet(std::vector<StorageElement>& elems) : Iterator(elems) {}
         
+        void operator++() override {
+            while (index < elements.size() && dynamic_cast<StorageBullet*>(&elements[index]) == nullptr) {
+                index++;
+            }
+            index++;
+        }
+        
+        StorageElement& operator*() override {
+            return elements[index-1];
+        }
+        
+        bool operator!=(const Iterator& other) override {
+            return index != dynamic_cast<const IteratorBullet*>(&other)->index;
+        }
     };
     
     
@@ -74,30 +123,52 @@ public:
     }
     
     
-    int getPoints() {return points;}
+    int getPoints() { return points; }
     
-    int getNumKilled() {return numKilled;}
+    int getNumKilled() { return numKilled; }
     
     int getNumMissed();
     
-    Iterator begin();
+    Iterator begin() {
+        return Iterator(elements);
+    }
     
-    Iterator end();
+    Iterator end() {
+        return Iterator(elements);
+    }
     
-    IteratorBird beginBird();
+    IteratorBird beginBird() {
+        return IteratorBird(elements);
+    }
     
-    IteratorBird endBird();
+    IteratorBird endBird() {
+        return IteratorBird(elements);
+    }
     
-    IteratorBullet beginBullet();
+    IteratorBullet beginBullet() {
+        return IteratorBullet(elements);
+    }
     
-    IteratorBullet endBullet();
+    IteratorBullet endBullet() {
+        return IteratorBullet(elements);
+    }
     
-    void addElement(StorageElement element);
+    void addElement(StorageElement element)
+    {
+        elements.push_back(element);
+        if (dynamic_cast<StorageBird*>(&element) != nullptr) {
+            numBirds++;
+        }
+    }
     
-    void reset();
     
-    
-    
-    
+    void reset() {
+        elements.clear();
+        numKilled = 0;
+        numBirds = 0;
+        points = 0;
+        //time = new StorageTime();
+        //gun = new StorageGun();
+    };
     
 };

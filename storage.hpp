@@ -10,26 +10,27 @@
 
 #include <stdio.h>
 #include <vector>
+#include "StorageElement.h"
 
 #endif /* storage_hpp */
 
 
-class StorageElement
-{
-    virtual ~StorageElement();
-};
+//class StorageElement
+//{
+//    virtual ~StorageElement();
+//};
 
-class StorageBird: public StorageElement
-{
-    ~StorageBird() {};
-};
-
-
-class StorageBullet: public StorageElement
-{
-    ~StorageBullet() {};
-    
-};
+//class StorageBird: public StorageElement
+//{
+//    ~StorageBird() {};
+//};
+//
+//
+//class StorageBullet: public StorageElement
+//{
+//    ~StorageBullet() {};
+//    
+//};
 
 class StorageTime
 {
@@ -38,7 +39,13 @@ class StorageTime
 
 class StorageGun
 {
-    
+private:
+   Point pt;
+   double angle;
+public:
+   StorageGun(const Point& pt) : angle(0.78 /* 45 degrees */), pt(pt) {}
+   double getAngle() { return angle; }
+   Point getPoint() { return pt; }
 };
 
 

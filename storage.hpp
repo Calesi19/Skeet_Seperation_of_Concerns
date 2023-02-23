@@ -16,18 +16,18 @@
 
 class StorageElement
 {
-    
+    virtual ~StorageElement();
 };
 
 class StorageBird: public StorageElement
 {
-    
+    ~StorageBird();
 };
 
 
 class StorageBullet: public StorageElement
 {
-    
+    ~StorageBullet();
 };
 
 class StorageTime
@@ -55,7 +55,6 @@ private:
     StorageGun gun;
     
     
-    
     class Iterator
     {
     protected:
@@ -68,6 +67,8 @@ private:
         virtual StorageElement& operator*() = 0;
         virtual bool operator!=(const Iterator& other) = 0;
     };
+    
+    
     
     class IteratorBird: public Iterator
     {
@@ -89,6 +90,8 @@ private:
             return index != dynamic_cast<const IteratorBird*>(&other)->index;
         }
     };
+    
+    
     
     class IteratorBullet: public Iterator
     {

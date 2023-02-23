@@ -21,13 +21,14 @@ class StorageElement
 
 class StorageBird: public StorageElement
 {
-    ~StorageBird();
+    ~StorageBird() {};
 };
 
 
 class StorageBullet: public StorageElement
 {
-    ~StorageBullet();
+    ~StorageBullet() {};
+    
 };
 
 class StorageTime

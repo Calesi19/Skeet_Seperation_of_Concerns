@@ -12,7 +12,7 @@
 
 //These will probably cause a circular dependency error
 #include "point.h"
-#include "InterfaceElement.h"
+class InterfaceElement;
 class LogicElement;
 
 //Base Storage Element class
@@ -33,6 +33,8 @@ public:
 	double getRadius() { return radius; }
 	int getPoints() { return points; }
 	bool isDead() { return dead; }
+	//Forces this to be an abstract class
+	virtual void doNothing() = 0;
 
 };
 
@@ -40,6 +42,7 @@ public:
 class StorageBird : public StorageElement
 {
 private:
+	void doNothing() { return; }
 };
 
 //
@@ -48,10 +51,13 @@ class StorageEffect : public StorageElement
 private:
 	int age;
 	Point ptEnd;
+
+	void doNothing() { return; }
 public:
 	StorageEffect();
 	int getAge() { return age; }
 	Point getEndPoint() { return ptEnd; }
+	
 };
 
 
@@ -59,6 +65,7 @@ class StorageBullet : public StorageElement
 {
 private:
 	int timeToDie;
+	void doNothing() { return; }
 public:
 	StorageBullet();
 	int getTimeToDie() { return timeToDie; }

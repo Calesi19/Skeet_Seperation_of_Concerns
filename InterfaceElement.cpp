@@ -1,131 +1,131 @@
 #include "InterfaceElement.h"
 
-void InterfacePellet::draw(StorageElement element)
+void InterfacePellet::draw(StorageElement* element)
 {
-   if (!element.isDead())
-      drawDot(element.getPoint(), 3.0, 1.0, 1.0, 0.0);
+   if (!element->isDead())
+      drawDot(element->getPoint(), 3.0, 1.0, 1.0, 0.0);
 }
 
-void InterfaceMissile::draw(StorageElement element)
+void InterfaceMissile::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
       // missile is a line with a dot at the end so it looks like fins.
-      Point ptNext(element.getPoint());
-      ptNext.add(element.getVelocity());
-      drawLine(element.getPoint(), ptNext, 1.0, 1.0, 0.0);
-      drawDot(element.getPoint(), 3.0, 1.0, 1.0, 1.0);
+      Point ptNext(element->getPoint());
+      ptNext.add(element->getVelocity());
+      drawLine(element->getPoint(), ptNext, 1.0, 1.0, 0.0);
+      drawDot(element->getPoint(), 3.0, 1.0, 1.0, 1.0);
    }
 }
 
-void InterfaceBomb::draw(StorageElement element)
+void InterfaceBomb::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
       // Bomb actually has a gradient to cut out the harsh edges
-      drawDot(element.getPoint(), element.getRadius() + 2.0, 0.50, 0.50, 0.00);
-      drawDot(element.getPoint(), element.getRadius() + 1.0, 0.75, 0.75, 0.00);
-      drawDot(element.getPoint(), element.getRadius() + 0.0, 0.87, 0.87, 0.00);
-      drawDot(element.getPoint(), element.getRadius() - 1.0, 1.00, 1.00, 0.00);
+      drawDot(element->getPoint(), element->getRadius() + 2.0, 0.50, 0.50, 0.00);
+      drawDot(element->getPoint(), element->getRadius() + 1.0, 0.75, 0.75, 0.00);
+      drawDot(element->getPoint(), element->getRadius() + 0.0, 0.87, 0.87, 0.00);
+      drawDot(element->getPoint(), element->getRadius() - 1.0, 1.00, 1.00, 0.00);
    }
 }
 
-void InterfaceShrapnel::draw(StorageElement element)
+void InterfaceShrapnel::draw(StorageElement* element)
 {
-   if (!element.isDead())
-      drawDot(element.getPoint(), element.getRadius(), 1.0, 1.0, 0.0);
+   if (!element->isDead())
+      drawDot(element->getPoint(), element->getRadius(), 1.0, 1.0, 0.0);
 }
 
-void InterfaceFragment::draw(StorageElement element)
+void InterfaceFragment::draw(StorageElement* element)
 {
-   if (element.isDead())
+   if (element->isDead())
       return;
 
    // Draw this sucker
    glBegin(GL_TRIANGLE_FAN);
 
    // the color is a function of age - fading to black
-   glColor3f((GLfloat)element.getAge(), (GLfloat)element.getAge(), (GLfloat)element.getAge());
+   glColor3f((GLfloat)element->getAge(), (GLfloat)element->getAge(), (GLfloat)element->getAge());
 
    // draw the fragment
-   glVertex2f((GLfloat)(element.getPoint().getX() - size), (GLfloat)(element.getPoint().getY() - size));
-   glVertex2f((GLfloat)(element.getPoint().getX() + size), (GLfloat)(element.getPoint().getY() - size));
-   glVertex2f((GLfloat)(element.getPoint().getX() + size), (GLfloat)(element.getPoint().getY() + size));
-   glVertex2f((GLfloat)(element.getPoint().getX() - size), (GLfloat)(element.getPoint().getY() + size));
+   glVertex2f((GLfloat)(element->getPoint().getX() - element->getRadius()), (GLfloat)(element->getPoint().getY() - element->getRadius()));
+   glVertex2f((GLfloat)(element->getPoint().getX() + element->getRadius()), (GLfloat)(element->getPoint().getY() - element->getRadius()));
+   glVertex2f((GLfloat)(element->getPoint().getX() + element->getRadius()), (GLfloat)(element->getPoint().getY() + element->getRadius()));
+   glVertex2f((GLfloat)(element->getPoint().getX() - element->getRadius()), (GLfloat)(element->getPoint().getY() + element->getRadius()));
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 }
 
-void InterfaceStreek::draw(StorageElement element)
+void InterfaceStreek::draw(StorageElement* element)
 {
-   if (element.isDead())
+   if (element->isDead())
       return;
 
    // Draw this sucker
    glBegin(GL_LINES);
-   glColor3f((GLfloat)element.getAge(), (GLfloat)element.getAge(), (GLfloat)element.getAge());
+   glColor3f((GLfloat)element->getAge(), (GLfloat)element->getAge(), (GLfloat)element->getAge());
 
    // Draw the actual line
-   glVertex2f((GLfloat)element.getPoint().getX(), (GLfloat)element.getPoint().getY());
-   glVertex2f((GLfloat)element.getEndPoint().getX(), (GLfloat)element.getEndPoint().getY());
+   glVertex2f((GLfloat)element->getPoint().getX(), (GLfloat)element->getPoint().getY());
+   glVertex2f((GLfloat)element->getEndPoint().getX(), (GLfloat)element->getEndPoint().getY());
 
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 }
 
-void InterfaceExhaust::draw(StorageElement element)
+void InterfaceExhaust::draw(StorageElement* element)
 {
-   if (element.isDead())
+   if (element->isDead())
       return;
 
    // Draw this sucker
    glBegin(GL_LINES);
-   glColor3f((GLfloat)element.getAge(), (GLfloat)element.getAge(), (GLfloat)element.getAge());
+   glColor3f((GLfloat)element->getAge(), (GLfloat)element->getAge(), (GLfloat)element->getAge());
 
    // Draw the actual line
-   glVertex2f((GLfloat)element.gePoint().getX(), (GLfloat)element.gePoint().getY());
-   glVertex2f((GLfloat)element.getEndPoint().getX(), (GLfloat)element.getEndPoint().getY());
+   glVertex2f((GLfloat)element->getPoint().getX(), (GLfloat)element->getPoint().getY());
+   glVertex2f((GLfloat)element->getEndPoint().getX(), (GLfloat)element->getEndPoint().getY());
 
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 }
 
-void InterfaceStandard::draw(StorageElement element)
+void InterfaceStandard::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
-      drawDisk(element.getPoint(), element.getRadius() - 0.0, 1.0, 1.0, 1.0); // white outline
-      drawDisk(element.getPoint(), element.getRadius() - 3.0, 0.0, 0.0, 1.0); // blue center
+      drawDisk(element->getPoint(), element->getRadius() - 0.0, 1.0, 1.0, 1.0); // white outline
+      drawDisk(element->getPoint(), element->getRadius() - 3.0, 0.0, 0.0, 1.0); // blue center
    }
 }
 
-void InterfaceSinker::draw(StorageElement element)
+void InterfaceSinker::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
-      drawDisk(element.getPoint(), element.getRadius() - 0.0, 0.0, 0.0, 0.8);
-      drawDisk(element.getPoint(), element.getRadius() - 4.0, 0.0, 0.0, 0.0);
+      drawDisk(element->getPoint(), element->getRadius() - 0.0, 0.0, 0.0, 0.8);
+      drawDisk(element->getPoint(), element->getRadius() - 4.0, 0.0, 0.0, 0.0);
    }
 }
 
-void InterfaceFloater::draw(StorageElement element)
+void InterfaceFloater::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
-      drawDisk(element.getPoint(), element.getRadius() - 0.0, 0.0, 0.0, 1.0); // blue outline
-      drawDisk(element.getPoint(), element.getRadius() - 4.0, 1.0, 1.0, 1.0); // white center
+      drawDisk(element->getPoint(), element->getRadius() - 0.0, 0.0, 0.0, 1.0); // blue outline
+      drawDisk(element->getPoint(), element->getRadius() - 4.0, 1.0, 1.0, 1.0); // white center
    }
 }
 
-void InterfaceCrazy::draw(StorageElement element)
+void InterfaceCrazy::draw(StorageElement* element)
 {
-   if (!element.isDead())
+   if (!element->isDead())
    {
-      drawDisk(element.getPoint(), element.getRadius() * 1.0, 0.0, 0.0, 1.0); // bright blue outside
-      drawDisk(element.getPoint(), element.getRadius() * 0.8, 0.2, 0.2, 1.0);
-      drawDisk(element.getPoint(), element.getRadius() * 0.6, 0.4, 0.4, 1.0);
-      drawDisk(element.getPoint(), element.getRadius() * 0.4, 0.6, 0.6, 1.0);
-      drawDisk(element.getPoint(), element.getRadius() * 0.2, 0.8, 0.8, 1.0); // almost white inside
+      drawDisk(element->getPoint(), element->getRadius() * 1.0, 0.0, 0.0, 1.0); // bright blue outside
+      drawDisk(element->getPoint(), element->getRadius() * 0.8, 0.2, 0.2, 1.0);
+      drawDisk(element->getPoint(), element->getRadius() * 0.6, 0.4, 0.4, 1.0);
+      drawDisk(element->getPoint(), element->getRadius() * 0.4, 0.6, 0.6, 1.0);
+      drawDisk(element->getPoint(), element->getRadius() * 0.2, 0.8, 0.8, 1.0); // almost white inside
    }
 }
 

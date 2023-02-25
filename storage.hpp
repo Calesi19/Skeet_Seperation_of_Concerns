@@ -54,7 +54,7 @@ class Storage
 
 private:
     
-    
+   Point dimensions;
     std::vector <StorageElement> elements;
     int numBirds;
     int points;

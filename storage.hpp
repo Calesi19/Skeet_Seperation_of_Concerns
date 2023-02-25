@@ -51,6 +51,11 @@ public:
 
 class Storage
 {
+    class StorageElement;
+    class StorageBird;
+    class StorageGun;
+    class StorageTime;
+    class StorageBullet;
 
 private:
     
@@ -71,9 +76,9 @@ private:
         
     public:
         Iterator(std::vector<StorageElement>& elems) : elements(elems), index(0) {}
-        virtual void operator++() = 0;
-        virtual StorageElement& operator*() = 0;
-        virtual bool operator!=(const Iterator& other) = 0;
+        virtual void operator++() { index++; };
+        virtual StorageElement& operator*() { return elements[index]; };
+        virtual bool operator!=(const Iterator& other) { return index != other.index; };
     };
     
     
@@ -138,7 +143,8 @@ public:
     
     int getNumKilled() { return numKilled; }
     
-    int getNumMissed();
+    int getNumMissed() { return 4; };     ///FIX
+    
     
     Iterator begin() {
         return Iterator(elements);

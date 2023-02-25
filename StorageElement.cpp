@@ -2,7 +2,8 @@
 
 StorageElement::StorageElement()
 {
-
+{    
+    
 }
 
 StorageBullet::StorageBullet()
@@ -17,5 +18,5 @@ StorageEffect::StorageEffect()
 
 StorageBird::StorageBird()
 {
-
+    
 }

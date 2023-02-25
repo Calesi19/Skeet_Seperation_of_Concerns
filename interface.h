@@ -16,7 +16,7 @@ public:
 class InterfaceElement
 {
 public: 
-   virtual void draw(/*StorageElement element*/);
+   virtual void draw(/*StorageElement element*/) = 0;
 };
 
 class InterfacePellet : InterfaceElement
